@@ -1,4 +1,4 @@
-package com.github.snuk87.keycloak.kafka;
+package com.radel.core.keycloak.kafka;
 
 import java.util.Map;
 
@@ -25,10 +25,14 @@ public class KafkaEventListenerProviderFactory implements EventListenerProviderF
 
 	@Override
 	public EventListenerProvider create(KeycloakSession session) {
+
 		if (instance == null) {
 			instance = new KafkaEventListenerProvider(bootstrapServers, clientId, topicEvents, events, topicAdminEvents,
-					kafkaProducerProperties, new KafkaStandardProducerFactory());
+													  kafkaProducerProperties, new KafkaStandardProducerFactory(), session);
 		}
+
+		kafkaProducerProperties.keySet().forEach(s -> System.out.println(s));
+		kafkaProducerProperties.values().forEach(s -> System.out.println((String) s));
 
 		return instance;
 	}

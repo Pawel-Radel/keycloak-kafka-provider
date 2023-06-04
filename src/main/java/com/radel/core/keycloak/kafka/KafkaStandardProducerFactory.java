@@ -1,4 +1,4 @@
-package com.github.snuk87.keycloak.kafka;
+package com.radel.core.keycloak.kafka;
 
 import java.util.Map;
 import java.util.Properties;
@@ -12,7 +12,7 @@ public final class KafkaStandardProducerFactory implements KafkaProducerFactory 
 
 	@Override
 	public Producer<String, String> createProducer(String clientId, String bootstrapServer,
-			Map<String, Object> optionalProperties) {
+												   Map<String, Object> optionalProperties) {
 		Properties props = new Properties();
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
 		props.put(ProducerConfig.CLIENT_ID_CONFIG, clientId);

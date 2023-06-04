@@ -1,4 +1,4 @@
-package com.github.snuk87.keycloak.kafka;
+package com.radel.core.keycloak.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,9 @@ public class KafkaProducerConfig {
 		KafkaProducerProperty[] producerProperties = KafkaProducerProperty.values();
 
 		for (KafkaProducerProperty property : producerProperties) {
+
+			System.out.println(property.getName());
+
 			if (property.getName() != null && scope.get(property.getName()) != null) {
 				propertyMap.put(property.getName(), scope.get(property.getName()));
 			}

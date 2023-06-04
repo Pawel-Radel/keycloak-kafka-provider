@@ -1,4 +1,4 @@
-package com.github.snuk87.keycloak.kafka;
+package com.radel.core.keycloak.kafka;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

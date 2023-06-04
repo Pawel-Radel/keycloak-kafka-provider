@@ -1,4 +1,4 @@
-package com.github.snuk87.keycloak.kafka;
+package com.radel.core.keycloak.kafka;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,17 +12,20 @@ import org.junit.jupiter.api.Test;
 import org.keycloak.events.Event;
 import org.keycloak.events.EventType;
 import org.keycloak.events.admin.AdminEvent;
+import org.keycloak.models.KeycloakSession;
 
 class KafkaEventListenerProviderTests {
 
 	private KafkaEventListenerProvider listener;
 	private KafkaProducerFactory factory;
 
+	private KeycloakSession session;
+
 	@BeforeEach
 	void setUp() throws Exception {
 		factory = new KafkaMockProducerFactory();
 		listener = new KafkaEventListenerProvider("", "", "", new String[] { "REGISTER" }, "admin-events", Map.of(),
-				factory);
+				factory, session);
 	}
 
 	@Test
@@ -59,7 +62,7 @@ class KafkaEventListenerProviderTests {
 
 	@Test
 	void shouldDoNothingWhenTopicAdminEventsIsNull() throws Exception {
-		listener = new KafkaEventListenerProvider("", "", "", new String[] { "REGISTER" }, null, Map.of(), factory);
+		listener = new KafkaEventListenerProvider("", "", "", new String[] { "REGISTER" }, null, Map.of(), factory, session);
 		AdminEvent event = new AdminEvent();
 		MockProducer<?, ?> producer = getProducerUsingReflection();
 
